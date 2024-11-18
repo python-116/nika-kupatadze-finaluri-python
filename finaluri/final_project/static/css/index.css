@@ -1,0 +1,19 @@
+.container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 95px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  border: 5px solid rgb(222, 143, 32);
+  width: 70%;
+}

@@ -1,0 +1,15 @@
+body {
+  background: radial-gradient(circle, #9b59b6, #4b0082);
+}
+
+ul {
+  border: 7px solid rgb(75, 17, 17);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+li {
+  border: 3px red solid;
+  border-radius: 3px;
+}
