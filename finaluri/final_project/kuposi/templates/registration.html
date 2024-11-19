@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <section>
+        <div class="registration">
+            <form method="POST">
+                {% csrf_token %}
+                <a href="{% url 'social:begin' 'google-oauth2' %}">Register with Google</a>
+                <fieldset>
+                    <legend>Register</legend>
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required>
+
+                    <label for="userName">User Name:</label>
+                    <input type="text" id="userName" name="userName" required>
+
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </fieldset>
+
+
+                <button type="submit">Submit</button>
+
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock %}

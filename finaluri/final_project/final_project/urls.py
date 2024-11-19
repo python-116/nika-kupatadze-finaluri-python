@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from kuposi import views
 
 urlpatterns = [
@@ -24,4 +24,9 @@ urlpatterns = [
     path('contact/', views.contact , name='contact'),
     path('about/', views.about , name='about'),
     path('api/', views.APIpage , name='API'),
+    path('registration/', views.registration , name='registration'),
+    path('login/', views.login , name='login'),
+    path('prfile/', views.profile , name='profile'),
+    path('oauth/', include('social_django.urls', namespace='social')),
+
 ]   

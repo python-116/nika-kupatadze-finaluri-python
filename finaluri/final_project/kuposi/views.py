@@ -1,6 +1,8 @@
 import aiohttp
-import asyncio
-from django.shortcuts import render
+from django.contrib.auth.hashers import make_password,check_password
+import secrets
+from .models import Registrations
+from django.shortcuts import render,redirect
 
 def index(request):
     return render(request, "index.html")
@@ -47,4 +49,56 @@ async def APIpage(request):
         return render(request, 'APIpage.html')
 
 
+def registration(request):
+    if request.method=="POST":
+        firstName = request.POST.get('firstName')
+        lastName = request.POST.get('lastName')
+        userName = request.POST.get('userName')
+        date = request.POST.get('date')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
 
+        hashed_password=make_password(password)
+
+        Registrations.objects.create(
+            firstName = firstName,
+            lastName = lastName,
+            userName =userName,
+            date = date,
+            email = email,
+            password=hashed_password
+
+        )
+
+        return redirect('index')
+        
+    return render(request,'registration.html')
+
+
+def login(request):
+    if request.method=="POST":
+        userName=request.POST.get('userName')
+        password=request.POST.get('password')
+
+        db_password=Registrations.objects.filter(userName=userName).values('password').first()
+        if db_password is not None and (check_password(password,db_password['password'])):
+            session_token = secrets.token_hex(32)
+            request.session['session_token']=session_token
+            Registrations.objects.filter(userName=userName).update(session_token=session_token)
+            return redirect('profile')
+        else:
+            return render(request, 'login.html', {'error' : 'invalid password or email'})   
+
+    else:
+        return render(request, 'login.html')
+    
+def profile(request):
+    session_token=request.session.get('session_token')
+    if session_token:
+        user = Registrations.objects.filter(session_token=session_token).values().first()
+        user.pop('password')
+        user.pop('session_token')
+        user.pop('id')
+        return render(request, 'profile.html',{"user_data" : user})
+    else:
+        return render(request, 'profile.html',{"user_data" : False})

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <section>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="userName">User name</label>
+            <input name="userName" id="password" type="text">
+            <label for="password">password</label>
+
+            <input name="password" id="password" type="password">
+            <button type="submit">submit</button>
+            {% if error %}
+            <p style="color: red;">{{error}}</p>
+            {% endif %}
+        </form>
+
+    </section>
+</div>
+{% endblock %}
