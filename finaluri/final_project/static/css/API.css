@@ -14,5 +14,6 @@ section {
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  /* border: 5px solid rgb(222, 143, 32); */
   width: 70%;
 }

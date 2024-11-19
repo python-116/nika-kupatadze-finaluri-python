@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <section>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="anime_name">Search anime and get information about it:</label>
+            <input name="anime_name" id="anime_name" type="search" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if anime_found %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>IMDB</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ name }}</td>
+                    <td>{{ IMDB }}</td>
+                    <td>{{ description }}</td>
+                    <td><img src="{{ image }}" alt="{{ name }}" style="width:150px; height:auto;"></td>
+                </tr>
+            </tbody>
+        </table>
+        {% else %}
+        <p>No anime found. Please try again.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}
