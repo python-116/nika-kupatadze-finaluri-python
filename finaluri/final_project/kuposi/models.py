@@ -13,3 +13,13 @@ class Registrations(models.Model):
 
     def __st__(self):
         return self.firstname
+
+
+class Giga_chat_users(models.Model):
+    giga_name=models.CharField(max_length=100)
+    giga_surname=models.CharField(max_length=100)
+    giga_age=models.CharField(max_length=10)
+    giga_height=models.CharField(max_length=10)
+
+    def __st__(self):
+        return self.giga_name

@@ -28,5 +28,7 @@ urlpatterns = [
     path('login/', views.login , name='login'),
     path('prfile/', views.profile , name='profile'),
     path('oauth/', include('social_django.urls', namespace='social')),
+    path('info/', views.info , name='info'),
+
 
 ]   

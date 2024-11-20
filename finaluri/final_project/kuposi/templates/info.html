@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <section>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="giga_name">Giga Chat name :</label>
+            <input type="text" id="giga_name" name="giga_name">
+            <label for="giga_surname">Giga Chat surname :</label>
+            <input type="text" id="giga_surname" name="giga_surname">
+            <label for="giga_age">Giga Chat age :</label>
+            <input type="text" id="giga_age" name="giga_age">
+            <label for="giga_height">Giga Chat height:</label>
+            <input type="text" id="giga_height" name="giga_height">
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

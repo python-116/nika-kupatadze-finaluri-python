@@ -1,10 +1,18 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 <div class="container">
     <section>
-        <p>This is our website</p>
-
+        {% for admin in admin_dic %}
+        <p>Creator of the website : {{admin.name}} {{admin.surname}}</p>
+        <p>His age : {{admin.age}}</p>
+        <p>Height : {{admin.height}}</p>
+        <p>His photo</p>
+        <img src="{{ admin.image }}" alt="Image of {{ admin.name }}" style="width: 300px; height: 300px;">
+        {% endfor %}
+        <div style="height: 80px;"></div>
+        <p>If you want to upload your Giga Chat information</p>
+        <p><a href="{% url 'info' %}">click here </a></p>
     </section>
 </div>
 {% endblock %}

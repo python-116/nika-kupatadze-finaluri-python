@@ -14,6 +14,24 @@
         {% else %}
         <p style="color: red;">you must be logged in ! ! !</p>
         {% endif %}
+
+
+        <div style="height: 100px;"></div>
+        <div class="gigaUser">
+            {% for giga in upload_giga_chat %}
+            <p>yor giga name :{{giga.giga_name}}</p>
+            <p>yor giga surname :{{giga.giga_surname}}</p>
+            <p>yor giga age:{{giga.giga_age}}</p>
+            <p>yor giga height:{{giga.giga_height}}</p>
+            <p>your giga photo</p>
+            <img src="{{ giga.giga_photo.url }}" alt="Image of {{ giga.giga_name }}"
+                style="width: 100px; height: 100px;">
+            {% empty %}
+            <tr colspan="3">
+                no information found!
+            </tr>
+            {% endfor %}
+        </div>
     </section>
 </div>
 {% endblock %}

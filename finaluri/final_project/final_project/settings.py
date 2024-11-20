@@ -138,6 +138,14 @@ LOGIN_REDIRECT_URL = '/profile/'  # Redirect after successful login
 LOGOUT_REDIRECT_URL = '/'        # Redirect after logout
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Example for Gmail
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'kuposi069@gmail.com'
+EMAIL_HOST_PASSWORD = 'kuposi69@69'
+DEFAULT_FROM_EMAIL = 'kuposi069@gmail.com'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

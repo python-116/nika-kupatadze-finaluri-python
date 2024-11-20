@@ -1,17 +1,46 @@
 import aiohttp
 from django.contrib.auth.hashers import make_password,check_password
 import secrets
-from .models import Registrations
+from .models import Registrations,Giga_chat_users
 from django.shortcuts import render,redirect
+from django.core.mail import send_mail
+from django.conf import settings
 
 def index(request):
     return render(request, "index.html")
 
 def contact(request):
-    return render(request, "contact.html")
+    if request.method=='POST':
+        name=request.POST['name']
+        Email=request.POST['Email']
+        subject=request.POST['subject']
+        message=request.POST['message']
+
+        full_message=f'name:{name},Email:{Email}, subject:{subject} message:{message}'
+
+        try:
+            send_mail(
+                subject,
+                full_message,
+                settings.DEFAULT_FROM_EMAIL,  # From email
+                [settings.DEFAULT_FROM_EMAIL],  # To email(s)
+                fail_silently=False,
+            )
+
+            return render(request, "contact.html" ,{"success":True})
+        except Exception as e:
+            return render(request, 'contact.html', {'error':str(e)})
+    return render(request, 'contact.html')
 
 def about(request):
-    return render(request, "about.html")
+    admin_dic=[
+        {'name':"nika",
+        'surname':"kupatadze",
+        'age':'18',
+        'height':"1.85cm",
+        'image':"https://i.pinimg.com/originals/55/c0/15/55c01503b223e297c490055485c872f7.jpg",}
+    ]
+    return render(request, "about.html", {"admin_dic":admin_dic})
 
 
 async def anime_API_function(anime_name):
@@ -92,13 +121,30 @@ def login(request):
     else:
         return render(request, 'login.html')
     
+
+def info(request):
+    if request.method=="POST":
+        giga_name = request.POST.get("giga_name")
+        giga_surname = request.POST.get("giga_surname")
+        giga_age = request.POST.get("giga_age")
+        giga_height = request.POST.get("giga_height")
+
+        Giga_chat_users.objects.create(giga_name=giga_name,giga_surname=giga_surname,giga_age=giga_age,giga_height=giga_height)
+        return redirect("profile")
+    return render(request, "info.html",)
+
 def profile(request):
     session_token=request.session.get('session_token')
+    upload=Giga_chat_users.objects.all()
     if session_token:
         user = Registrations.objects.filter(session_token=session_token).values().first()
         user.pop('password')
         user.pop('session_token')
         user.pop('id')
-        return render(request, 'profile.html',{"user_data" : user})
+        return render(request, 'profile.html',{"user_data" : user, "upload_giga_chat" : upload})
     else:
-        return render(request, 'profile.html',{"user_data" : False})
+        return render(request, 'profile.html',{"user_data" : False, "upload_giga_chat" : upload})
+    
+    
+    
+
