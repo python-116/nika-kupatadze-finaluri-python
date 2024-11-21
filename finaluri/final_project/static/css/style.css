@@ -1,14 +1,38 @@
 body {
+  font-family: "Poppins", sans-serif;
   padding: 10px;
-  background: radial-gradient(circle, #9b59b6, #4b0082);
+  background: radial-gradient(circle, #a29bfe, #6c5ce7);
+  color: #2d3436;
 }
-
 ul {
   border-radius: 5px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  padding: 10px;
+  background: linear-gradient(to bottom, #6c5ce7, #3a3951);
 }
+
 li {
   border-radius: 3px;
+  list-style: none;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+li a {
+  text-decoration: none;
+  color: #2d3436;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+li:hover {
+  transform: scale(0.8);
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #6c5ce7;
+  color: white;
 }

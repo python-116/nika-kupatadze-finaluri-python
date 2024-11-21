@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/API.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
 
     <title>Document</title>
 </head>
@@ -18,14 +23,18 @@
         <nav>
             <ul>
                 <li><a href="{% url 'index' %}">Home</a></li>
-                <li><a href="{% url 'contact' %}">Contact us</a></li>
-                <li><a href="{% url 'about' %}">About us</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
                 <li><a href="{% url 'API' %}">Animes</a></li>
             </ul>
         </nav>
     </header>
     {% block content %}
     {% endblock %}
+    <footer>
+        <p>&copy; 2024 Kuposi's App. All Rights Reserved.</p>
+    </footer>
+
 </body>
 
 </html>
