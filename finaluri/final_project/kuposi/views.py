@@ -1,7 +1,7 @@
 import aiohttp
 from django.contrib.auth.hashers import make_password,check_password
 import secrets
-from .models import Registrations,Giga_chat_users
+from .models import Registrations,Giga_chat_users,user_contact
 from django.shortcuts import render,redirect
 from django.core.mail import send_mail
 from django.conf import settings
@@ -10,26 +10,34 @@ def index(request):
     return render(request, "index.html")
 
 def contact(request):
-    if request.method=='POST':
-        name=request.POST['name']
-        Email=request.POST['Email']
-        subject=request.POST['subject']
-        message=request.POST['message']
+    if request.method == 'POST':
+        name = request.POST['name']
+        Email = request.POST['Email']
+        subject = request.POST['subject']
+        message = request.POST['message']
 
-        full_message=f'name:{name},Email:{Email}, subject:{subject} message:{message}'
+
+        full_message = f'name: {name}, Email: {Email}, subject: {subject}, message: {message}'
+        user_contact.objects.create(
+            name=name,
+            Email=Email,
+            subject=subject,
+            message=message
+        )
 
         try:
             send_mail(
                 subject,
                 full_message,
-                settings.DEFAULT_FROM_EMAIL,  # From email
-                [settings.DEFAULT_FROM_EMAIL],  # To email(s)
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.DEFAULT_FROM_EMAIL],
+                ['kupatadzenikusha@gmail.com'],
                 fail_silently=False,
             )
-
-            return render(request, "contact.html" ,{"success":True})
+            return render(request, "contact.html", {"success": True})
         except Exception as e:
-            return render(request, 'contact.html', {'error':str(e)})
+            return render(request, 'contact.html', {'error': str(e)})
+
     return render(request, 'contact.html')
 
 def about(request):

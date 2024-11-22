@@ -15,3 +15,9 @@ textarea:focus {
   border-color: #6c5ce7;
   box-shadow: 0 0 5px rgba(108, 92, 231, 0.5);
 }
+
+.instuction {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

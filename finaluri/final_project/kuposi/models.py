@@ -23,3 +23,12 @@ class Giga_chat_users(models.Model):
 
     def __st__(self):
         return self.giga_name
+    
+class user_contact(models.Model):
+    name=models.CharField(max_length=100)
+    Email=models.CharField(max_length=100)
+    subject=models.CharField(max_length=200)
+    message=models.CharField(max_length=2000)
+
+    def __str__(self):
+        return self.name
